@@ -9,7 +9,8 @@ public class AudioManager : MonoBehaviour {
     public Sound[] sounds;
     
     public static AudioManager instance;
-    public GameObject player;
+    // public GameObject player;
+    GameObject player;
     
     void Awake() {
         
@@ -31,6 +32,9 @@ public class AudioManager : MonoBehaviour {
             s.source.mute = s.mute;
             s.source.pitch = s.pitch;
         }
+        
+        Play("MainMusic");
+
     }
 
     public void Play (string name){
@@ -58,6 +62,9 @@ public class AudioManager : MonoBehaviour {
     }
 
     void Update() {
+        // var playerScript = player.gameObject.GetComponent<PlayerMovement>();
+        // var playerRigid = player.gameObject.GetComponent<Rigidbody>();
+        player = GameObject.FindWithTag("Player");
         var playerScript = player.gameObject.GetComponent<PlayerMovement>();
         var playerRigid = player.gameObject.GetComponent<Rigidbody>();
 

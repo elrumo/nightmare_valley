@@ -12,11 +12,10 @@ GameObject:
   - component: {fileID: 6123099344559095713}
   - component: {fileID: 6123099344559095710}
   - component: {fileID: 6123099344559095711}
-  - component: {fileID: 6123099344559095717}
   - component: {fileID: 6123099344559095708}
   - component: {fileID: 6123099344559095716}
   m_Layer: 0
-  m_Name: Player 1
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,7 +101,6 @@ MonoBehaviour:
   player: {fileID: 6123099344559095711}
   boots: {fileID: 0}
   playerObject: {fileID: 6123099344559095709}
-  cameraObj: {fileID: 0}
   animator: {fileID: 6123099344559095708}
   IsInAir: 1
   CanInvert: 1
@@ -136,19 +134,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 1
---- !u!65 &6123099344559095717
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6123099344559095709}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.1568451, y: 0.57, z: 0.2}
-  m_Center: {x: 0.004070282, y: 0, z: 0}
 --- !u!95 &6123099344559095708
 Animator:
   serializedVersion: 3
@@ -178,7 +163,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.15156746
+  m_Radius: 0.12923431
   m_Height: 0.64712435
   m_Direction: 1
-  m_Center: {x: 0.016775131, y: -0.0012106299, z: 0}
+  m_Center: {x: -0.00983429, y: -0.0012106299, z: 0}

@@ -5,9 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
+    public void ChangeScene(int lvlNum){
+        SceneManager.LoadScene(lvlNum);
+    }
+
     void OnTriggerEnter(Collider other) {
      if (other.gameObject.tag == "Player"){
-         SceneManager.LoadScene(1);
+         ChangeScene(1);
      }      
     }
 }

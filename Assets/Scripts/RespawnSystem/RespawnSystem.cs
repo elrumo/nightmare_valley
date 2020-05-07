@@ -14,6 +14,13 @@ public class RespawnSystem : MonoBehaviour
         RespawnPlayer(respawnPoints[respawnPointActive].transform);
     }
 
+    private void OnTriggerEnter(Collider other) {
+        if(other.tag == "Player"){
+            print(other.tag);
+            RunRespawnPlayer();
+        }
+    }
+    
     public void RespawnPlayer(Transform respawnPoint){
             var playerObj = player.gameObject.GetComponent<PlayerMovement>();
             var playerRig = player.gameObject.GetComponent<Rigidbody>();

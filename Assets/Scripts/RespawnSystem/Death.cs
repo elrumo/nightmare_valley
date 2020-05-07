@@ -5,7 +5,7 @@ using UnityEngine;
 public class Death : MonoBehaviour
 {
     public RespawnSystem respawnSystem;
-    public GameObject player;
+    // public GameObject player;
 
     void OnTriggerEnter(Collider other){
             if(other.tag == "Player"){
