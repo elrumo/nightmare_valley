@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody player;
     public Rigidbody boots;
     public GameObject playerObject;
-    public FollowPlayer cameraObj;
     
     public Animator animator;
     
@@ -16,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     public bool CanInvert = false;
     public bool IsGravityInverted = false;
     public bool IsJumping = false;
+
+    public string RespawnPoint = "respawnPoint_1";
 
     public float fallMultiplier = 2f;
     public float lowJumpMultiplier = 50f;
@@ -32,12 +33,8 @@ public class PlayerMovement : MonoBehaviour
     public float jumpingVel = 12f;
 
     public float smoothTime = 1.5f;
-
-    void Jump(float force) {
-        IsJumping = true;
-        player.AddForce(0, force, 0);
-        player.drag = midAirDrag;
-    }
+    
+    public bool IsWalking;
 
 
     // Collision
@@ -86,6 +83,9 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    void playFootsetps(bool muteSound){
+        FindObjectOfType<AudioManager>().Play("FootSteps");
+    }
 
     // Player Controller
     void movePlayer(float force, float x, float y, float z ) {
@@ -93,80 +93,14 @@ public class PlayerMovement : MonoBehaviour
         player.AddForce(force * Time.deltaTime, 0, 0);
     }
 
-    void Start(){
-        Physics.gravity = RegularGravity;
+    void Jump(float force) {
+        IsJumping = true;
+        player.AddForce(0, force, 0);
+        player.drag = midAirDrag;
     }
 
-    void FixedUpdate(){
-        // Right
-        if ( Input.GetKey(KeyCode.RightArrow)){
-            if (IsGravityInverted){
-                if(!IsInAir){
-                    movePlayer(movingForce, 0, 180, 180);
-                } else{
-                    movePlayer(movingForce/30, 0, 180, 180);
-                }
-            }else{
-                if(!IsInAir){
-                    movePlayer(movingForce, 0, 0, 0);
-                } else {
-                    movePlayer((movingForce/30), 0, 0, 0);
-                }
-            }
-        }
-        
-        // Left
-        if ( Input.GetKey(KeyCode.LeftArrow)) {
-            if (IsGravityInverted){
-                if(!IsInAir){
-                    movePlayer(-movingForce, 0, 0, 180);
-                } else {
-                    movePlayer(-(movingForce/30), 0, 0, 180);
-                }
-            }
-            else
-            {
-                if(!IsInAir)
-                {
-                    movePlayer(-movingForce, 0, 180, 0);
-                }
-                else
-                {
-                    movePlayer(-(movingForce/30), 0, 180, 0);
-                }
-            }
-        }
-        
-        if(IsGravityInverted){
-            // cameraObj.cameraOffset.y = Mathf.SmoothStep(cameraObj.cameraOffset.y, -5, 0f);
-            // print("Hi");
-        } else{
-            // cameraObj.cameraOffset.y = Mathf.SmoothStep(cameraObj.cameraOffset.y, 8, 0f);
-        }
-
-    }
-    void Update()
-    {
-        float horizontalMove = player.velocity.x;
-
-        // Trigger animations
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-        animator.SetBool("IsJumping", IsJumping);
-
-        if(CanInvert){
-
-        }
-
-
-         // Better jump
-        if(player.velocity.y < -3 && IsJumping) 
-        {
-            player.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime; 
-        }
-
-        // Jump
-        if ( Input.GetKeyDown("c") && !IsJumping) {
-            if (!IsGravityInverted){
+    void MakeJump(){
+        if (!IsGravityInverted){
                 
                 Jump(jumpingForce);
 
@@ -183,36 +117,96 @@ public class PlayerMovement : MonoBehaviour
             } else {
                 Jump(-jumpingForce);
             }
+    }
+
+    void InvertGravity(){
+        if(!IsInAir || IsJumping & IsInAir){
+            if( !IsGravityInverted ){
+                Physics.gravity = InvertedGravity;
+                transform.rotation=Quaternion.Euler(0,180,180);
+            } 
+            if( IsGravityInverted ){
+                Physics.gravity = -InvertedGravity;
+                transform.rotation=Quaternion.Euler(0,0,0);
+            }
+            IsGravityInverted = !IsGravityInverted;
+            IsJumping = false;
+        }
+    }
+
+    void Start(){
+        Physics.gravity = RegularGravity;
+    }
+
+    void FixedUpdate(){
+        if ( Input.GetKeyDown("c") && !IsJumping) {
+            MakeJump();
+        }
+    }
+
+    void Update(){
+
+        float horizontalMove = player.velocity.x;
+
+        // Trigger animations
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+        animator.SetBool("IsJumping", IsJumping);
+
+        // Right
+        if ( Input.GetKey(KeyCode.RightArrow)){
+            if (IsGravityInverted){
+                if(!IsInAir){
+                    IsWalking = true;
+                    movePlayer(movingForce, 0, 180, 180);
+                } else{
+                    IsWalking = false;
+                    movePlayer((movingForce/30), 0, 180, 180);
+                }
+            }else{
+                if(!IsInAir){
+                    IsWalking = true;
+                    movePlayer(movingForce, 0, 0, 0);
+                } else {
+                    IsWalking = false;
+                    movePlayer((movingForce/30), 0, 0, 0);
+                }
+            }
+        }else{
+            IsWalking = false;
+        }
+        
+        // Left
+        if ( Input.GetKey(KeyCode.LeftArrow)) {
+            if (IsGravityInverted){
+                if(!IsInAir){
+                    IsWalking = true;
+                    movePlayer(-movingForce, 0, 0, 180);
+                } else {
+                    IsWalking = false;
+                    movePlayer(-(movingForce/30), 0, 0, 180);
+                }
+            }
+            else{
+                if(!IsInAir){
+                    IsWalking = true;
+                    movePlayer(-movingForce, 0, 180, 0);
+                }
+                else{
+                    IsWalking = false;
+                    movePlayer(-(movingForce/30), 0, 180, 0);
+                }
+            }
+        }
+
+         // Better jump
+        if(player.velocity.y < -3 && IsJumping) 
+        {
+            player.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime; 
         }
 
         // Invert gravity
-        if (Input.GetKeyDown("x") && CanInvert)
-        {   
-            if(!IsInAir || IsJumping & IsInAir){
-                player.drag = groundDrag - 6;
-
-                if( !IsGravityInverted )
-                {
-                    Physics.gravity = InvertedGravity;
-                    transform.rotation=Quaternion.Euler(0,180,180);
-                    // IsGravityInverted = true;
-                } 
-                if( IsGravityInverted )
-                {
-                    Physics.gravity = -InvertedGravity;
-                    transform.rotation=Quaternion.Euler(0,0,0);
-                    // IsGravityInverted = false;
-                }
-                IsGravityInverted = !IsGravityInverted;
-                IsJumping = false;
-            }
-            
-        }
-
-        // Pikcup items
-        if (Input.GetKeyDown("z") && CanInvert)
-        {   
-            
+        if (Input.GetKeyDown("x") && CanInvert){   
+            InvertGravity();
         }
 
     }

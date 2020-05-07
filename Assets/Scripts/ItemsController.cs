@@ -17,18 +17,12 @@ public class ItemsController : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
-    {   
+    
+    {   // Check if player is near item
         if( transform.position.x - player.transform.position.x > 1.6f || player.transform.position.x - transform.position.x < -1.6f ){
             IsPlayerNear = false;
-            print("Hi");
         }
         
         animator.SetBool("IsNearItem", IsPlayerNear);

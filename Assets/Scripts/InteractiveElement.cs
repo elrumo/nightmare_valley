@@ -5,27 +5,32 @@ using UnityEngine;
 public class InteractiveElement : MonoBehaviour
 {
     
-    public Rigidbody triggerElement;
     public Rigidbody player;
+    public Rigidbody triggerElement;
     public Rigidbody targetElement;
 
     // Start is called before the first frame update
     void Start()
     {
-        targetElement.constraints = RigidbodyConstraints.FreezePositionY;
     }
 
     void OnCollisionEnter(Collision other){
+        
+        //Set targetElement to fall after triggerElement is activated
         if(other.gameObject.name == triggerElement.name){
-            targetElement.constraints = ~RigidbodyConstraints.FreezePositionY;
+            targetElement.constraints = ~RigidbodyConstraints.FreezePositionY & ~RigidbodyConstraints.FreezeRotationZ;
+            // Play success sound
+            FindObjectOfType<AudioManager>().Play("ImpactSound");
+        }
+
+        // Play hit soundFX when interactive element collides with ground layer
+        if(other.gameObject.layer == 9){
+            FindObjectOfType<AudioManager>().Play("ImpactSound");
         }
     }
 
     // Update is called once per frame
     void Update()
     {   
-        if(Input.GetKeyDown("a")){
-            targetElement.constraints = ~RigidbodyConstraints.FreezePositionY;
-        }
     }
 }

@@ -8,8 +8,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: see-through
-  m_Shader: {fileID: 4800000, guid: ac2f92f6b286eea439e509d2343487ea, type: 3}
+  m_Shader: {fileID: 4800000, guid: f1c332c0884ef2b4bb26584f688eac3a, type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA _ALPHABLEND_ON _ALPHA_CLIP _COLOR_ADJUST
+    _FIXED_NORMALS_VIEWSPACE _FOG
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -73,17 +74,17 @@ Material:
     m_Floats:
     - PixelSnap: 0
     - _BlendAmount: 0
-    - _Brightness: 2
+    - _Brightness: 1
     - _BumpScale: 1
     - _Cull: 0
-    - _CustomRenderQueue: 1
-    - _Cutoff: 0.72
+    - _CustomRenderQueue: 0
+    - _Cutoff: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
-    - _EmissionPower: 1
+    - _EmissionPower: -9.83
     - _EnableExternalAlpha: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 1
     - _GlossyReflections: 1
     - _Hue: 0
     - _Metallic: 0
@@ -93,7 +94,7 @@ Material:
     - _RenderQueue: 0
     - _RimPower: 2
     - _Saturation: 1
-    - _ShadowAlphaCutoff: 0.1
+    - _ShadowAlphaCutoff: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 5
