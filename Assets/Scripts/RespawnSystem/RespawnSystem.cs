@@ -31,7 +31,7 @@ public class RespawnSystem : MonoBehaviour
             Physics.gravity = new Vector3(0, -30, 0);
             playerRig.velocity = Vector3.up * -20;
             player.transform.rotation = Quaternion.Euler(0,0,0);
-            deathCount.deathCount += 1;
+            deathCount.AddDeath();
     }
     // Start is called before the first frame update
     void Start()

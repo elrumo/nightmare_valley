@@ -23878,15 +23878,20 @@ PrefabInstance:
       propertyPath: deathCount
       value: 
       objectReference: {fileID: 1861913061}
+    - target: {fileID: 6123099344559095710, guid: ae95e3105b41441dd8fb0adeeec3b117,
+        type: 3}
+      propertyPath: CanInvert
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6123099344559095712, guid: ae95e3105b41441dd8fb0adeeec3b117,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 316.8
+      value: 15.2
       objectReference: {fileID: 0}
     - target: {fileID: 6123099344559095712, guid: ae95e3105b41441dd8fb0adeeec3b117,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4
+      value: 3.1
       objectReference: {fileID: 0}
     - target: {fileID: 6123099344559095712, guid: ae95e3105b41441dd8fb0adeeec3b117,
         type: 3}
@@ -24368,6 +24373,21 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 575396385}
+    - target: {fileID: 5453294087169954361, guid: 3005ae7f2b03f4e5c9d989623b7150d0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5453294087169954362, guid: 3005ae7f2b03f4e5c9d989623b7150d0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5453294087169954363, guid: 3005ae7f2b03f4e5c9d989623b7150d0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5453294087169954365, guid: 3005ae7f2b03f4e5c9d989623b7150d0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -24423,7 +24443,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5453294087169954342, guid: 3005ae7f2b03f4e5c9d989623b7150d0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3005ae7f2b03f4e5c9d989623b7150d0, type: 3}
 --- !u!1001 &7677399122491292997
 PrefabInstance:
@@ -35389,6 +35410,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5833359449288142215, guid: 44a6dcda7b9e74a80adfd636ab9103d2,
+        type: 3}
+      propertyPath: deathCount
+      value: 
+      objectReference: {fileID: 1861913061}
+    - target: {fileID: 5833359449288142215, guid: 44a6dcda7b9e74a80adfd636ab9103d2,
+        type: 3}
+      propertyPath: levelNumber
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7954000773951994598, guid: 44a6dcda7b9e74a80adfd636ab9103d2,
         type: 3}
       propertyPath: m_Name

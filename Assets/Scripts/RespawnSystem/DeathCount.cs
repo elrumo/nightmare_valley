@@ -5,10 +5,21 @@ using UnityEngine.UI;
 
 public class DeathCount : MonoBehaviour
 {
+    static int deathCountStatic;
     public int deathCount;
+
     public Text text;
 
+    public void AddDeath(){
+        deathCountStatic ++;
+    }
+
+    public void ResetDeath(){
+        deathCountStatic = 0;
+    }
+    
     void Update() {
-        text.text = deathCount.ToString();
+        deathCount = deathCountStatic;
+        text.text = deathCountStatic.ToString();
     }
 }
